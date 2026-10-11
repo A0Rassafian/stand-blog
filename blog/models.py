@@ -2,6 +2,8 @@ from django.utils import timezone
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+from django.utils.text import slugify
 # Create your models here.
 
 class ArticleManager(models.Manager):
@@ -31,7 +33,7 @@ class Article(models.Model):
     author = models.ForeignKey(User , on_delete=models.CASCADE , related_name='article')
     category = models.ManyToManyField(Category)
     title = models.CharField(max_length=70
-                             , help_text="Title of the article",
+                             , help_text="Title of the article",unique=True
                              # ,unique=True
                              # db_column='mytitle'
                              # null=True,
@@ -47,8 +49,13 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField()
     # published = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(unique=True, blank=True)
     objects = models.Manager()
     custom_manager=ArticleManager()
+
+
+    def get_absolute_url(self):
+        return reverse("blog:article_detail", kwargs={'slug':self.slug})
 
 
 
@@ -58,6 +65,12 @@ class Article(models.Model):
 
     def save(self , *args,**kwargs):
         print(self.title)
+        self.slug = slugify(self.title)
         super(Article ,self).save(*args,**kwargs)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = "Article"
+        verbose_name_plural = "Articles"
 
 
