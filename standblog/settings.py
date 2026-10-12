@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     # for clean image in media after : pip install django-cleanup
     'django_cleanup.apps.CleanupConfig',
+    # for render partial in django  after :pip install django_render_partial
+    'django_render_partial',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +73,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'context_processors.context_processors.recent_articles'
+                'context_processors.context_processors.recent_articles',
+                'context_processors.context_processors.categories',
             ],
         },
     },

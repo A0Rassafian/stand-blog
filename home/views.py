@@ -10,3 +10,7 @@ def home(request):
     # print(reverse("blog:article_detail",args=(1,)))
     resent_articles = Article.objects.all().order_by('-created')[:3]
     return render(request,"home/index.html" ,{"articles":articles})
+
+
+def  sidebar(request):
+    return render(request,"includes/sidebar.html")
