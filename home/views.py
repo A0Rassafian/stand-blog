@@ -9,4 +9,4 @@ def home(request):
     articles = Article.objects.all()
     # print(reverse("blog:article_detail",args=(1,)))
     resent_articles = Article.objects.all().order_by('-created')[:3]
-    return render(request,"home/index.html" ,{"articles":articles,"resent_articles":resent_articles})
+    return render(request,"home/index.html" ,{"articles":articles})
