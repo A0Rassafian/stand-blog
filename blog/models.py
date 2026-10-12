@@ -30,8 +30,8 @@ class Article(models.Model):
     # ("A","پایتون"),
     # ("B", "java"),
     # )
-    author = models.ForeignKey(User , on_delete=models.CASCADE , related_name='article')
-    category = models.ManyToManyField(Category)
+    author = models.ForeignKey(User , on_delete=models.CASCADE , related_name='articles')
+    category = models.ManyToManyField(Category , related_name='articles')
     title = models.CharField(max_length=70
                              , help_text="Title of the article",unique=True
                              # ,unique=True
