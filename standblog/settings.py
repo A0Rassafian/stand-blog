@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     # for render partial in django  after :pip install django_render_partial
     'django_render_partial',
+    #for share in django after: pip install django-social-share
+    'django_social_share',
 ]
 
 MIDDLEWARE = [
